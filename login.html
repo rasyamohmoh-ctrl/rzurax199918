@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | ZURAX LITMATCH</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at top left, #6a00ff, #000 60%);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .particle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #00d4ff, transparent 70%);
+      border-radius: 50%;
+      animation: float 10s infinite linear;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+      to { transform: translateY(-100vh) translateX(50vw) scale(0.5); opacity: 0; }
+    }
+
+    .login-box {
+      position: relative;
+      width: 320px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 40px 30px 50px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(106, 0, 255, 0.8);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      z-index: 2;
+      animation: fadeIn 1s ease-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h2 {
+      color: #00d4ff;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00d4ff;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid #ff00b8;
+      box-shadow: 0 0 25px #6a00ff;
+      background-image: url('https://iili.io/K4nAz6x.md.jpg');
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 15px;
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 0 40px #00d4ff;
+    }
+
+    input {
+      width: 90%;
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      text-align: center;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      background: rgba(255,255,255,0.25);
+      box-shadow: 0 0 10px #00d4ff;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #6a00ff, #ff00b8, #00d4ff);
+      background-size: 300%;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px #6a00ff;
+      animation: moveGradient 4s infinite linear;
+    }
+
+    @keyframes moveGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #00d4ff;
+    }
+
+    .rating-btn {
+      margin-top: 10px;
+      display: inline-block;
+      text-decoration: none;
+      background: linear-gradient(90deg, #00ffa6, #00c8ff);
+      color: #000;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 8px;
+      transition: 0.3s;
+      box-shadow: 0 0 10px #00d4ff;
+    }
+
+    .rating-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ffa6;
+    }
+
+    .glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #6a00ff55, transparent 70%);
+      filter: blur(100px);
+      animation: pulse 6s infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 0.8; }
+      to { transform: scale(1.3); opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glow"></div>
+
+  <script>
+    for (let i = 0; i < 15; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDuration = 8 + Math.random() * 5 + 's';
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <div class="login-box">
+    <div class="avatar"></div>
+    <h2>ZURAX LITMATCH STORE</h2>
+    <input type="text" id="username" placeholder="Masukkan Username"><br>
+    <input type="password" id="password" placeholder="Masukkan Password"><br>
+    <button onclick="login()">Masuk</button>
+
+    <!-- Tombol tambahan menuju rating -->
+    <a href="rating.html" class="rating-btn">⭐ Lihat / Beri Rating</a>
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      if (user === '' || pass === '') {
+        alert('Isi username dan password!');
+      } else {
+        alert('Selamat datang, ' + user + '!');
+        localStorage.setItem("userLogin", user);
+        window.location.href = 'index.html';
+      }
+    }
+  </script>
+</body>
+</html>

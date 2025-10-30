@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZURAX LITMATCH | Toko APK Premium</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #0e0020, #000);
+      color: #fff;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* === Glow besar === */
+    .glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,0,255,0.4), transparent 80%);
+      filter: blur(120px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 6s infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.3; }
+    }
+
+    /* === Partikel neon === */
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #00d4ff, transparent 70%);
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: float 10s infinite linear;
+      z-index: 0;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-120vh) translateX(30vw) scale(0.5); opacity: 0; }
+    }
+
+    /* === Header === */
+    header {
+      text-align: center;
+      padding: 40px 20px 30px 20px;
+      background: rgba(15, 15, 25, 0.9);
+      border-bottom: 2px solid #7f00ff;
+      box-shadow: 0 0 25px #7f00ff;
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    header img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #7f00ff;
+      box-shadow: 0 0 35px #a000ff;
+      margin-bottom: 15px;
+      animation: floatLogo 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatLogo {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #a06cff;
+      text-shadow: 0 0 25px #b266ff;
+    }
+
+    p.sub {
+      max-width: 600px;
+      margin: 10px auto 0;
+      color: #d0d0d0;
+      font-size: 0.95rem;
+    }
+
+    /* Tombol navigasi */
+    .menu-btns {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .menu-btn {
+      background: linear-gradient(90deg, #7f00ff, #e100ff);
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(160, 100, 255, 0.4);
+    }
+
+    .menu-btn:hover {
+      background: linear-gradient(90deg, #00ffa6, #00c8ff);
+      color: #000;
+      box-shadow: 0 0 25px rgba(0,255,180,0.8);
+      transform: scale(1.05);
+    }
+
+    /* === Tombol Logout === */
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      background: linear-gradient(90deg, #ff004c, #ff0099);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(255, 0, 120, 0.5);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .logout-btn:hover {
+      background: linear-gradient(90deg, #00ffa6, #00c8ff);
+      color: #000;
+      box-shadow: 0 0 30px rgba(0,255,180,0.8);
+      transform: scale(1.1);
+    }
+
+    /* === Daftar aplikasi === */
+    .app-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .app-card {
+      background: rgba(32, 32, 40, 0.95);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(160, 100, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 1s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 35px rgba(160, 100, 255, 0.8);
+    }
+
+    .app-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+
+    .app-card:hover img {
+      filter: brightness(1.2);
+    }
+
+    .app-info {
+      padding: 15px;
+    }
+
+    .app-info h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #a06cff;
+    }
+
+    .app-info p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin: 8px 0;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #00ffa6;
+      margin-top: 10px;
+    }
+
+    .btn-buy {
+      display: inline-block;
+      background: linear-gradient(90deg, #9c0594, #e100ff);
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(160, 100, 255, 0.4);
+    }
+
+    .btn-buy:hover {
+      background: linear-gradient(90deg, #00ffa6, #00c8ff);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0,255,180,0.8);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0f0f12;
+      color: #777;
+      border-top: 1px solid #7f00ff;
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer span {
+      color: #a06cff;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔊 Efek suara masuk -->
+  <audio autoplay>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1d4c4c74d2.mp3?filename=space-whoosh-102202.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="logout-btn" onclick="keluar()">🚪 Logout</button>
+
+  <!-- Partikel Neon -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDuration = 6 + Math.random() * 6 + 's';
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <div class="glow"></div>
+
+  <header>
+    <img src="https://iili.io/K4nAz6x.md.jpg" alt="Zurax Logo" />
+    <h1>ZURAX LITMATCH STORE</h1>
+    <p class="sub">
+      Selamat datang di <b>Zurax Litmatch</b> — pusat penjualan APK mood litmatch dengan fitur langka dan harga bersahabat.<br>
+      Kami menghadirkan APK Mood premium dengan performa stabil, aman, dan 100% tested oleh tim developer kami.
+    </p>
+
+    <div class="menu-btns">
+      <a href="video.html" class="menu-btn">🎬 Lihat Video</a>
+      <a href="store.html" class="menu-btn">🛒 Store Akun Litmatch</a>
+    </div>
+  </header>
+
+  <main class="app-list" id="appList"></main>
+
+  <footer>
+    &copy; 2025 <span>ZURAX LITMATCH</span> | Semua hak dilindungi.
+  </footer>
+
+  <script>
+    const user = localStorage.getItem("userLogin");
+    if (!user) {
+      alert("Kamu harus login dulu!");
+      window.location.href = "login.html";
+    }
+
+    const initialApps = [
+      {id:'a1',title:'APK BUG AVATAR PREMIUM',price:250000,img:'https://iili.io/K4nMonp.md.jpg',desc:'APK bug avatar versi terbaru — 6.66.1'},
+      {id:'a2',title:'APK ROOM LITMATCH PRO',price:100000,img:'https://iili.io/K4nMonp.md.jpg',desc:'APK room versi stabil — 6.66.1'},
+      {id:'a3',title:'APK PETI 0 DETIK',price:120000,img:'https://iili.io/K4nMonp.md.jpg',desc:'APK peti bug 0 detik versi — 6.70.0'},
+      {id:'a4',title:'BUG AVATAR RARE',price:50000,img:'https://iili.io/K4nMonp.md.jpg',desc:'Bug avatar langka & stabil.'}
+    ];
+
+    const appList = document.getElementById('appList');
+    function formatRupiah(amount){return amount===0?'Gratis':'Rp '+amount.toLocaleString('id-ID');}
+
+    initialApps.forEach(app=>{
+      const card=document.createElement('div');
+      card.className='app-card';
+      card.innerHTML=`
+        <img src="${app.img}" alt="${app.title}">
+        <div class="app-info">
+          <h2>${app.title}</h2>
+          <p>${app.desc}</p>
+          <div class="price">${formatRupiah(app.price)}</div>
+          <a href="checkout.html?id=${app.id}" class="btn-buy">Beli Sekarang</a>
+        </div>`;
+      appList.appendChild(card);
+    });
+
+    // === Fungsi Logout ===
+    function keluar() {
+      const sound = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c603d2ab5.mp3?filename=logout-sci-fi-102206.mp3');
+      sound.play();
+      setTimeout(() => {
+        localStorage.removeItem("userLogin");
+        window.location.href = "logout.html";
+      }, 1500);
+    }
+  </script>
+</body>
+</html>

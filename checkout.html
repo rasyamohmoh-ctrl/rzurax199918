@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | ZURAX LITMATCH</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #0e0020, #000);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* === Glow animasi === */
+    .glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,0,255,0.5), transparent 70%);
+      filter: blur(150px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 6s infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+      100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.3; }
+    }
+
+    /* === Partikel neon === */
+    .particle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: radial-gradient(circle, #00d4ff, transparent 70%);
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 10s infinite linear;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 0.9; }
+      100% { transform: translateY(-120vh) translateX(30vw) scale(0.5); opacity: 0; }
+    }
+
+    /* === Kotak checkout === */
+    .checkout-box {
+      background: rgba(20, 20, 30, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(160, 100, 255, 0.6);
+      padding: 40px 45px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      border: 2px solid #7f00ff;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .checkout-box img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #a06cff;
+      box-shadow: 0 0 25px #b266ff;
+      margin-bottom: 20px;
+      animation: glowPulse 3s infinite alternate ease-in-out;
+    }
+
+    @keyframes glowPulse {
+      from { box-shadow: 0 0 25px #a06cff; }
+      to { box-shadow: 0 0 45px #00c8ff; }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #a06cff;
+      text-shadow: 0 0 25px #b266ff;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: #00ffa6;
+      font-size: 1.3rem;
+      margin: 10px 0 20px 0;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00ffa6;
+    }
+
+    p.desc {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-buy {
+      background: linear-gradient(90deg, #7f00ff, #e100ff);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(160, 100, 255, 0.5);
+    }
+
+    .btn-buy:hover {
+      background: linear-gradient(90deg, #00ffa6, #00c8ff);
+      color: #000;
+      box-shadow: 0 0 30px rgba(0,255,180,0.8);
+      transform: scale(1.05);
+    }
+
+    .btn-back {
+      background: rgba(30,30,30,0.9);
+      color: #ccc;
+      border: 1px solid #555;
+    }
+
+    .btn-back:hover {
+      background: #111;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      width: 100%;
+      font-size: 0.85rem;
+      color: #777;
+      z-index: 2;
+    }
+
+    footer span {
+      color: #a06cff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔊 Efek suara masuk -->
+  <audio autoplay>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1d4c4c74d2.mp3?filename=space-whoosh-102202.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- 🔮 Glow animasi -->
+  <div class="glow"></div>
+
+  <!-- 🌌 Partikel neon -->
+  <script>
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.top = Math.random() * 100 + 'vh';
+      p.style.animationDuration = 6 + Math.random() * 6 + 's';
+      document.body.appendChild(p);
+    }
+  </script>
+
+  <!-- 💎 Kotak checkout -->
+  <div class="checkout-box">
+    <img src="https://iili.io/K4nAz6x.md.jpg" alt="Zurax Logo">
+    <h1 id="appTitle">Memuat...</h1>
+    <div class="price" id="appPrice">-</div>
+    <p class="desc">
+      Pastikan kamu ingin membeli APK ini. Setelah pembayaran dikonfirmasi, file akan otomatis dikirim melalui sistem <b>ZURAX LITMATCH</b>.
+    </p>
+
+    <a href="thankyou.html" class="btn btn-buy">💎 Bayar Sekarang</a>
+    <a href="index.html" class="btn btn-back">⬅ Kembali ke Store</a>
+  </div>
+
+  <footer>
+    &copy; 2025 <span>ZURAX LITMATCH</span> | Sistem Checkout Aman & Terenkripsi.
+  </footer>
+
+  <script>
+    // Daftar APK
+    const apps = {
+      a1: { title: "APK BUG AVATAR PREMIUM", price: 250000 },
+      a2: { title: "APK ROOM LITMATCH PRO", price: 150000 },
+      a3: { title: "APK PETI 0 DETIK V2", price: 120000 },
+      a4: { title: "BUG AVATAR", price: 50000 }
+    };
+
+    // Ambil ID dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const appId = urlParams.get("id");
+
+    // Tampilkan detail
+    if (appId && apps[appId]) {
+      document.getElementById("appTitle").innerText = apps[appId].title;
+      document.getElementById("appPrice").innerText = "Rp " + apps[appId].price.toLocaleString('id-ID');
+    } else {
+      document.getElementById("appTitle").innerText = "Produk Tidak Ditemukan";
+      document.getElementById("appPrice").innerText = "-";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rating | ZURAX LITMATCH</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0e0e10, #000);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 30px;
+      background: rgba(15, 15, 20, 0.9);
+      border-bottom: 2px solid #7f00ff;
+      box-shadow: 0 0 20px #7f00ff;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #a06cff;
+      text-shadow: 0 0 20px #8a2be2;
+    }
+
+    header p {
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .rating-form {
+      background: rgba(32, 32, 40, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(160, 100, 255, 0.3);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .rating-stars {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-size: 32px;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    .rating-stars span {
+      transition: 0.3s;
+    }
+
+    .rating-stars span:hover,
+    .rating-stars span.active {
+      color: gold;
+      text-shadow: 0 0 15px gold;
+      transform: scale(1.2);
+    }
+
+    textarea {
+      width: 90%;
+      height: 80px;
+      border-radius: 10px;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      resize: none;
+    }
+
+    .submit-btn {
+      background: linear-gradient(90deg, #7f00ff, #e100ff);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 25px;
+      font-weight: bold;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(160, 100, 255, 0.4);
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(90deg, #00ffa6, #00c8ff);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    .rating-card {
+      background: rgba(32, 32, 40, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(160, 100, 255, 0.2);
+    }
+
+    .rating-card h3 {
+      color: #a06cff;
+      margin-bottom: 5px;
+    }
+
+    .stars {
+      color: gold;
+      font-size: 18px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #7f00ff, #e100ff);
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      text-align: center;
+      margin: 30px auto;
+      display: block;
+      width: fit-content;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(90deg, #00ffa6, #00c8ff);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0,255,180,0.8);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0f0f12;
+      color: #777;
+      border-top: 1px solid #7f00ff;
+      font-size: 0.9rem;
+    }
+
+    footer span {
+      color: #a06cff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⭐ Beri Rating untuk ZURAX LITMATCH</h1>
+    <p>Kami sangat menghargai feedback kamu untuk membuat layanan lebih baik!</p>
+  </header>
+
+  <div class="container">
+    <!-- Form Rating -->
+    <div class="rating-form">
+      <h2>Beri Ratingmu</h2>
+      <div class="rating-stars" id="stars">
+        <span data-rate="1">★</span>
+        <span data-rate="2">★</span>
+        <span data-rate="3">★</span>
+        <span data-rate="4">★</span>
+        <span data-rate="5">★</span>
+      </div>
+      <textarea id="review" placeholder="Tulis ulasan kamu di sini..."></textarea>
+      <br>
+      <button class="submit-btn" onclick="kirimRating()">Kirim Rating</button>
+    </div>
+
+    <!-- Daftar Rating -->
+    <div id="ratingList"></div>
+
+    <a href="login.html" class="back-btn">⬅ Kembali ke Login</a>
+  </div>
+
+  <footer>
+    &copy; 2025 <span>ZURAX LITMATCH</span> | Semua hak dilindungi.
+  </footer>
+
+  <script>
+    let selectedRate = 0;
+
+    // Efek klik bintang
+    document.querySelectorAll('#stars span').forEach(star => {
+      star.addEventListener('click', function() {
+        selectedRate = parseInt(this.getAttribute('data-rate'));
+        document.querySelectorAll('#stars span').forEach(s => s.classList.remove('active'));
+        for (let i = 0; i < selectedRate; i++) {
+          document.querySelectorAll('#stars span')[i].classList.add('active');
+        }
+      });
+    });
+
+    function kirimRating() {
+      const text = document.getElementById('review').value.trim();
+      if (selectedRate === 0) {
+        alert('Pilih jumlah bintang dulu!');
+        return;
+      }
+      if (!text) {
+        alert('Isi ulasan kamu dulu!');
+        return;
+      }
+
+      const rating = { rate: selectedRate, text };
+      const ratings = JSON.parse(localStorage.getItem('zurax_ratings')) || [];
+      ratings.push(rating);
+      localStorage.setItem('zurax_ratings', JSON.stringify(ratings));
+      renderRatings();
+      document.getElementById('review').value = '';
+      selectedRate = 0;
+      document.querySelectorAll('#stars span').forEach(s => s.classList.remove('active'));
+      alert('Terima kasih atas ratingmu!');
+    }
+
+    function renderRatings() {
+      const list = document.getElementById('ratingList');
+      list.innerHTML = '';
+      const ratings = JSON.parse(localStorage.getItem('zurax_ratings')) || [];
+      if (ratings.length === 0) {
+        list.innerHTML = '<p style="text-align:center;color:#999;">Belum ada rating.</p>';
+        return;
+      }
+      ratings.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'rating-card';
+        div.innerHTML = `
+          <h3>Pengguna Anonim</h3>
+          <div class="stars">${'★'.repeat(r.rate)}${'☆'.repeat(5 - r.rate)}</div>
+          <p>${r.text}</p>
+        `;
+        list.prepend(div);
+      });
+    }
+
+    renderRatings();
+  </script>
+</body>
+</html>
